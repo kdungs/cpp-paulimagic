@@ -62,10 +62,10 @@ auto operator*(Prefix lhs, Prefix rhs) noexcept -> Prefix {
 auto operator<<(std::ostream& os, Prefix p) -> std::ostream & {
   switch (p) {
     case Prefix::Pos1:
-      os << '1';
+      os << '+';
       break;
     case Prefix::Neg1:
-      os << "-1";
+      os << '-';
       break;
     case Prefix::PosI:
       os << 'i';

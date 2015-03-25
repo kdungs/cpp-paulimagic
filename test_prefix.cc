@@ -56,12 +56,12 @@ auto test_multiplicationOperator() -> void {
 
 auto test_ostreamOperator() -> void {
   auto ss = std::stringstream{};
-  ss << Prefix::Pos1;
-  ss << Prefix::Neg1;
-  ss << Prefix::PosI;
+  ss << Prefix::Pos1 << ',';
+  ss << Prefix::Neg1 << ',';
+  ss << Prefix::PosI << ',';
   ss << Prefix::NegI;
 
-  assert(ss.str() == std::string{"1-1i-i"});
+  assert(ss.str() == std::string{"+,-,i,-i"});
 }
 
 int main() {
