@@ -15,6 +15,7 @@ class Expression {
   explicit Expression(Prefix p) : Expression{p, {}} {}
   explicit Expression(std::initializer_list<PauliMatrix> ms)
       : Expression{Prefix::Pos1, ms} {}
+  Expression() : Expression{Prefix::Pos1, {}} {}
 
   auto prefix() const noexcept -> Prefix { return prefix_; }
   auto isPositive() const noexcept -> bool { return ::isPositive(prefix_); }
@@ -129,7 +130,9 @@ const auto Expression::NegativeImaginaryIdentity = Expression{Prefix::NegI};
 auto operator<<(std::ostream& os, const Expression& exp) -> std::ostream & {
   os << exp.prefix();
   if (exp.isIdentity()) {
-    os << '1';
+    if (exp.isReal()) {
+      os << '1';
+    }
   } else {
     std::copy(std::begin(exp.matrices_), std::end(exp.matrices_),
               std::ostream_iterator<PauliMatrix>(os));
