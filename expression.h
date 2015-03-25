@@ -76,6 +76,9 @@ class Expression {
         arr[k] = lm[i];
       }
       for (auto i = ri; k < 4; ++i, ++k) {
+        if (i >= rs) {
+          return false;
+        }
         arr[k] = rm[i];
       }
       if (arr[0] != arr[2] || arr[1] != arr[3]) {
