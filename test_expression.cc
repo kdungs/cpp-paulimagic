@@ -111,7 +111,7 @@ auto test_multiplicationOperator() -> void {
 }
 
 auto test_ostreamOperator() -> void {
-  auto ss = std::stringstream{};
+  std::stringstream ss;
   ss << Expression{Prefix::NegI, {PauliMatrix::X, PauliMatrix::Y}};
   assert(ss.str() == std::string{"-iXY"});
 }

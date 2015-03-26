@@ -52,10 +52,10 @@ auto test_multiplicationOperator() -> void {
   assert(Prefix::NegI * Prefix::Neg1 == Prefix::PosI);
   assert(Prefix::NegI * Prefix::PosI == Prefix::Pos1);
   assert(Prefix::NegI * Prefix::NegI == Prefix::Neg1);
-};
+}
 
 auto test_ostreamOperator() -> void {
-  auto ss = std::stringstream{};
+  std::stringstream ss;
   ss << Prefix::Pos1 << ',';
   ss << Prefix::Neg1 << ',';
   ss << Prefix::PosI << ',';

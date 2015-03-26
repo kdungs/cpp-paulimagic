@@ -30,7 +30,7 @@ auto test_isAcyclic() -> void {
 }
 
 auto test_ostreamOperator() -> void {
-  auto ss = std::stringstream{};
+  std::stringstream ss;
   ss << PauliMatrix::X;
   ss << PauliMatrix::Y;
   ss << PauliMatrix::Z;
