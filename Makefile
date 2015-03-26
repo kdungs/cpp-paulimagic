@@ -4,5 +4,8 @@ test:
 	@cd tests && make
 	@cd tests && make test
 
+coverage:
+	@cd tests && make coverage
+
 clean:
 	cd tests && make clean
