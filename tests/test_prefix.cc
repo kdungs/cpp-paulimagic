@@ -61,7 +61,7 @@ auto test_ostreamOperator() -> void {
   ss << Prefix::PosI << ',';
   ss << Prefix::NegI;
 
-  assert(ss.str() == std::string{"+,-,i,-i"});
+  assert(ss.str() == std::string{",-,i,-i"});
 }
 
 int main() {

@@ -11,16 +11,13 @@ class PauliMatrix {
   enum class BasicPauliMatrix { Identity, SigmaX, SigmaY, SigmaZ };
 
   PauliMatrix(Prefix p, BasicPauliMatrix m) noexcept : p_{p}, m_{m} {}
-  explicit PauliMatrix(BasicPauliMatrix m) noexcept
-      : PauliMatrix{Prefix::Pos1, m} {}
-  explicit PauliMatrix(Prefix p) noexcept
-      : PauliMatrix{p, BasicPauliMatrix::Identity} {}
   PauliMatrix() noexcept
       : PauliMatrix{Prefix::Pos1, BasicPauliMatrix::Identity} {}
 
   auto operator==(const PauliMatrix& rhs) const noexcept -> bool {
     return p_ == rhs.p_ && m_ == rhs.m_;
   }
+
   auto operator!=(const PauliMatrix& rhs) const noexcept -> bool {
     return !(*this == rhs);
   }
@@ -36,29 +33,29 @@ class PauliMatrix {
       return C{0, 0};
     }
     switch (p_) {
-      case  Prefix::Pos1:
+      case Prefix::Pos1:
         return C{2, 0};
-      case  Prefix::Neg1:
+      case Prefix::Neg1:
         return C{-2, 0};
-      case  Prefix::PosI:
+      case Prefix::PosI:
         return C{0, 2};
-      case  Prefix::NegI:
+      case Prefix::NegI:
         return C{0, -2};
       default:
         assert(false);
     }
   }
 
+ private:
   friend auto operator<<(std::ostream&, const PauliMatrix&) -> std::ostream&;
 
- private:
   auto mult(BasicPauliMatrix lhs, BasicPauliMatrix rhs) const noexcept
       -> PauliMatrix {
     if (lhs == BasicPauliMatrix::Identity) {  // 𝟙a = a
-      return PauliMatrix{rhs};
+      return PauliMatrix{Prefix::Pos1, rhs};
     }
     if (rhs == BasicPauliMatrix::Identity) {  // a𝟙 = a
-      return PauliMatrix{lhs};
+      return PauliMatrix{Prefix::Pos1, lhs};
     }
     if (lhs == rhs) {  // aa = 𝟙
       return PauliMatrix{};
@@ -114,10 +111,14 @@ auto operator<<(std::ostream& os, const PauliMatrix& pm) -> std::ostream & {
 }
 
 namespace PM {
-static const auto I = PauliMatrix{PauliMatrix::BasicPauliMatrix::Identity};
-static const auto X = PauliMatrix{PauliMatrix::BasicPauliMatrix::SigmaX};
-static const auto Y = PauliMatrix{PauliMatrix::BasicPauliMatrix::SigmaY};
-static const auto Z = PauliMatrix{PauliMatrix::BasicPauliMatrix::SigmaZ};
+static const auto I =
+    PauliMatrix{Prefix::Pos1, PauliMatrix::BasicPauliMatrix::Identity};
+static const auto X =
+    PauliMatrix{Prefix::Pos1, PauliMatrix::BasicPauliMatrix::SigmaX};
+static const auto Y =
+    PauliMatrix{Prefix::Pos1, PauliMatrix::BasicPauliMatrix::SigmaY};
+static const auto Z =
+    PauliMatrix{Prefix::Pos1, PauliMatrix::BasicPauliMatrix::SigmaZ};
 static const auto nI =
     PauliMatrix{Prefix::Neg1, PauliMatrix::BasicPauliMatrix::Identity};
 static const auto nX =
