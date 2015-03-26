@@ -4,8 +4,13 @@ test:
 	@cd tests && make
 	@cd tests && make test
 
-coverage:
-	@cd tests && make coverage
+coverage: test
+	lcov -o coverage.info --capture --directory .
+	lcov -r coverage.info /usr/include/\* -o coverage.info
+
+covhtml: coverage
+	genhtml -o coverage coverage.info
 
 clean:
-	cd tests && make clean
+	@cd tests && make clean
+	rm -rf coverage*
