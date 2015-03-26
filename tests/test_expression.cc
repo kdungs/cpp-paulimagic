@@ -28,6 +28,34 @@ auto test_isIdentity() -> void {
   assert(!Expression{PauliMatrix::X}.isIdentity());
 }
 
+auto test_equalityOperator() -> void {
+  assert(Expression::Identity == Expression::Identity);
+  assert(Expression::NegativeIdentity == Expression::NegativeIdentity);
+  assert(Expression::ImaginaryIdentity == Expression::ImaginaryIdentity);
+  assert(Expression::NegativeImaginaryIdentity ==
+         Expression::NegativeImaginaryIdentity);
+  assert(Expression{PauliMatrix::X} == Expression{PauliMatrix::X});
+  assert((Expression{PauliMatrix::X, PauliMatrix::Y} ==
+          Expression{PauliMatrix::X, PauliMatrix::Y}));
+}
+
+auto test_inequalityOperator() -> void {
+  assert(Expression::Identity != Expression::NegativeIdentity);
+  assert(Expression::Identity != Expression::ImaginaryIdentity);
+  assert(Expression::Identity != Expression::NegativeImaginaryIdentity);
+  assert(Expression::NegativeIdentity != Expression::Identity);
+  assert(Expression::NegativeIdentity != Expression::ImaginaryIdentity);
+  assert(Expression::NegativeIdentity != Expression::NegativeImaginaryIdentity);
+  assert(Expression::ImaginaryIdentity != Expression::Identity);
+  assert(Expression::ImaginaryIdentity != Expression::NegativeIdentity);
+  assert(Expression::ImaginaryIdentity !=
+         Expression::NegativeImaginaryIdentity);
+  assert(Expression::NegativeImaginaryIdentity != Expression::Identity);
+  assert(Expression::NegativeImaginaryIdentity != Expression::NegativeIdentity);
+  assert(Expression::NegativeImaginaryIdentity !=
+         Expression::ImaginaryIdentity);
+}
+
 auto test_multiplicationOperator() -> void {
   const auto& _1 = Expression::Identity;
   const auto& n1 = Expression::NegativeIdentity;
@@ -67,14 +95,20 @@ auto test_multiplicationOperator() -> void {
   auto yz = Expression{PauliMatrix::Y, PauliMatrix::Z};
   auto zx = Expression{PauliMatrix::Z, PauliMatrix::X};
   auto zy = Expression{PauliMatrix::Z, PauliMatrix::Y};
+  auto xyx = Expression{PauliMatrix::X, PauliMatrix::Y, PauliMatrix::X};
+  auto xzx = Expression{PauliMatrix::X, PauliMatrix::Z, PauliMatrix::X};
+  auto yxy = Expression{PauliMatrix::Y, PauliMatrix::X, PauliMatrix::Y};
+  auto yzy = Expression{PauliMatrix::Y, PauliMatrix::Z, PauliMatrix::Y};
+  auto zxz = Expression{PauliMatrix::Z, PauliMatrix::X, PauliMatrix::Z};
+  auto zyz = Expression{PauliMatrix::Z, PauliMatrix::Y, PauliMatrix::Z};
 
   // Multiplication with (prefixed) identity
-  assert(x * _1 == x);  // a1 = a
-  assert(_1 * x == x);  // 1a = a
-  assert(x * n1 == nx);  // a(-1) = -a
-  assert(n1 * x == nx);  // -1a = -a
-  assert(x * i == ix);  // a(i1) = ia
-  assert(i * x == ix);  // i1a = ia
+  assert(x * _1 == x);    // a1 = a
+  assert(_1 * x == x);    // 1a = a
+  assert(x * n1 == nx);   // a(-1) = -a
+  assert(n1 * x == nx);   // -1a = -a
+  assert(x * i == ix);    // a(i1) = ia
+  assert(i * x == ix);    // i1a = ia
   assert(x * ni == nix);  // a(-i1) = -ia
   assert(ni * x == nix);  // -i1a = -ia
   // Squares are identity: aa = 1
@@ -108,6 +142,18 @@ auto test_multiplicationOperator() -> void {
   assert(yz * yz == n1);
   assert(zx * zx == n1);
   assert(zy * zy == n1);
+  assert(x * yxy == n1);
+  assert(xyx * y == n1);
+  assert(x * zxz == n1);
+  assert(xzx * z == n1);
+  assert(y * xyx == n1);
+  assert(yxy * x == n1);
+  assert(y * zyz == n1);
+  assert(yzy * z == n1);
+  assert(z * xzx == n1);
+  assert(zxz * x == n1);
+  assert(z * yzy == n1);
+  assert(zyz * y == n1);
 }
 
 auto test_ostreamOperator() -> void {
@@ -120,6 +166,8 @@ int main() {
   test_isPositive();
   test_isReal();
   test_isIdentity();
+  test_equalityOperator();
+  test_inequalityOperator();
   test_multiplicationOperator();
   test_ostreamOperator();
 }
