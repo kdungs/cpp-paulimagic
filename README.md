@@ -1,5 +1,5 @@
 # Pauli Magic :sparkles:
-[![Build Status](https://travis-ci.org/kdungs/cpp-paulimagic.svg)](https://travis-ci.org/kdungs/cpp-paulimagic)
+[![Build Status](https://travis-ci.org/kdungs/cpp-paulimagic.svg)](https://travis-ci.org/kdungs/cpp-paulimagic) [![Coverage Status](https://coveralls.io/repos/kdungs/cpp-paulimagic/badge.svg?branch=master)](https://coveralls.io/r/kdungs/cpp-paulimagic?branch=master)
 
 A small header-only library that can help you with your tensor arithmetic. This is based on previous work by [McUrbn](https://github.com/McUrbn) for his Bachelor thesis. I merely implemented his ideas.
 
