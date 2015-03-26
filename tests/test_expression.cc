@@ -1,4 +1,4 @@
-#include "expression.h"
+#include "paulimagic/expression.h"
 
 #include <cassert>
 #include <sstream>

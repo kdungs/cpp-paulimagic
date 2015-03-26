@@ -1,4 +1,4 @@
-#include "tensor.h"
+#include "paulimagic/tensor.h"
 
 #include <iostream>
 

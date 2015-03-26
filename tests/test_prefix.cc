@@ -1,4 +1,4 @@
-#include "prefix.h"
+#include "paulimagic/prefix.h"
 
 #include <cassert>
 #include <sstream>

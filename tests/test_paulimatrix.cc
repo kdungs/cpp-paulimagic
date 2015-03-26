@@ -1,4 +1,4 @@
-#include "paulimatrix.h"
+#include "paulimagic/paulimatrix.h"
 
 #include <cassert>
 #include <sstream>
