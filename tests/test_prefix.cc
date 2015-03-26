@@ -27,8 +27,8 @@ auto test_negationOperator() -> void {
 auto test_timesI() -> void {
   assert(timesI(Prefix::Pos1) == Prefix::PosI);
   assert(timesI(Prefix::Neg1) == Prefix::NegI);
-  assert(timesI(Prefix::PosI) == Prefix::NegI);
-  assert(timesI(Prefix::NegI) == Prefix::PosI);
+  assert(timesI(Prefix::PosI) == Prefix::Neg1);
+  assert(timesI(Prefix::NegI) == Prefix::Pos1);
 }
 
 auto test_multiplicationOperator() -> void {
@@ -68,6 +68,7 @@ int main() {
   test_isPositive();
   test_isReal();
   test_negationOperator();
+  test_timesI();
   test_multiplicationOperator();
   test_ostreamOperator();
 }
