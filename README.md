@@ -5,7 +5,8 @@ A small header-only library that can help you with traces of tensor products tha
 ## Background
 The Pauli matrices σ<sub>x</sub>, σ<sub>y</sub>, σ<sub>z</sub> are traceless 2×2-matrices that are defined such that σ<sub>i</sub>σ<sub>i</sub>=𝟙. Additionally there are the commutation relations [σ<sub>a</sub>σ<sub>b</sub>]=2ⅈε<sub>abc</sub>σ<sub>c</sub> and the anti-commutation relations {σ<sub>a</sub>σ<sub>b</sub>} = 2δ<sub>ab</sub>𝟙. It follows directly, that for a≠b, σ<sub>a</sub>σ<sub>b</sub>=ⅈε<sub>abc</sub>σ<sub>c</sub>. For more information see [the corresponding Wikipedia article](https://en.wikipedia.org/wiki/Pauli_matrices).
 
-For the dot-product of two tensor products (a<sub>1</sub>⊗b<sub>1</sub>) and (a<sub>2</sub>⊗b<sub>2</sub>) it holds that (a<sub>1</sub>⊗b<sub>1</sub>)·(a<sub>2</sub>⊗b<sub>2</sub>) = (a<sub>1</sub>a<sub>2</sub>⊗b<sub>1</sub>b<sub>2</sub>). Also for traces of tensor products it holds that Tr(a⊗b) = Tr(a)Tr(b).
+For the product of two tensor products (a<sub>1</sub>⊗b<sub>1</sub>) and (a<sub>2</sub>⊗b<sub>2</sub>) it holds (_this is very much a simplification, for more detail check out [this Wikipedia article on the "Tensor product of algebras
+"](https://en.wikipedia.org/wiki/Tensor_product_of_algebras)_) that (a<sub>1</sub>⊗b<sub>1</sub>)(a<sub>2</sub>⊗b<sub>2</sub>) = (a<sub>1</sub>a<sub>2</sub>⊗b<sub>1</sub>b<sub>2</sub>). Also for traces of tensor products it holds that Tr(a⊗b) = Tr(a)Tr(b).
 
 This program uses said relations to simplify tensor products containing Pauli matrices and ultimately calculates traces of those.
 
