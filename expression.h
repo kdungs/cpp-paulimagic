@@ -22,6 +22,16 @@ class Expression {
   auto isReal() const noexcept -> bool { return ::isReal(prefix_); }
   auto isIdentity() const noexcept -> bool { return matrices_.empty(); }
 
+  auto operator==(const Expression& rhs) const -> bool {
+    if (prefix_ != rhs.prefix_ || matrices_.size() != rhs.matrices_.size()) {
+      return false;
+    }
+    return matrices_ == rhs.matrices_;
+  }
+  auto operator!=(const Expression& rhs) const -> bool {
+    return !(*this == rhs);
+  }
+
   auto operator*(const Expression& rhs) const -> Expression {
     auto res = *this;
     res.prefix_ = res.prefix_ * rhs.prefix_;
@@ -43,7 +53,7 @@ class Expression {
     };
 
     auto handle_permutation = [&res, &lm, &li, &rm, &ri, rs] (bool left) {
-      if ((left && li <= 0) || ri + 1 >= rs) {
+      if ((left && li <= 0) || (!left && ri + 1 >= rs)) {
         return false;
       }
       auto x = left ? lm[li - 1] : rm[ri + 1];
@@ -95,6 +105,7 @@ class Expression {
       for (auto i = 2 - loffset; i > 0; --i) {
         ++ri;
       }
+      res.prefix_ = res.prefix_ * Prefix::Neg1;
       return true;
     };
 
