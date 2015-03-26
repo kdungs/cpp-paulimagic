@@ -103,7 +103,7 @@ auto operator<<(std::ostream& os, PauliMatrix::BasicPauliMatrix m)
       os << 'Z';
       break;
     default:
-      assert(false);  // This should never happen!
+      assert(false);
   }
   return os;
 }

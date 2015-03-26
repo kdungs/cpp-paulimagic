@@ -27,7 +27,20 @@ class TensorProduct {
     elements_[I] = std::forward<PMAT>(pm);
   }
 
-  auto operator*(const TensorProduct<N>& rhs) -> TensorProduct<N> {
+  template <typename T = int, typename C = std::complex<T>>
+  auto trace() const noexcept -> C {
+    return std::accumulate(
+        std::begin(elements_), std::end(elements_), C{1, 0},
+        [](C acc, const PauliMatrix& pm) { return acc * pm.trace(); });
+  }
+
+  auto operator==(const TensorProduct<N>& rhs) const noexcept -> bool {
+    return elements_ == rhs.elements_;
+  }
+
+  auto operator!=(const TensorProduct<N>& rhs) const noexcept -> bool {}
+
+  auto operator*(const TensorProduct<N>& rhs) const -> TensorProduct<N> {
     auto res = TensorProduct<N>{};
     for (auto i = 0u; i < N; ++i) {
       res.elements_[i] = elements_[i] * rhs.elements_[i];
@@ -35,16 +48,9 @@ class TensorProduct {
     return res;
   }
 
-  template <typename T = int, typename C = std::complex<T>>
-  auto trace() const noexcept -> C {
-    return std::accumulate(std::begin(elements_), std::end(elements_), C{1, 0},
-                           [](C acc, const PauliMatrix& pm) {
-                             return acc * pm.trace();
-                           });
-  }
-
   template <std::size_t M>
-  friend auto operator<<(std::ostream&, const TensorProduct<M>&) -> std::ostream&;
+  friend auto operator<<(std::ostream&, const TensorProduct<M>&) -> std::ostream
+      &;
 
  private:
   std::array<PauliMatrix, N> elements_;
