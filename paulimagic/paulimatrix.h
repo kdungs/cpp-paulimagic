@@ -142,4 +142,4 @@ static const auto niY =
     PauliMatrix{Prefix::NegI, PauliMatrix::BasicPauliMatrix::SigmaY};
 static const auto niZ =
     PauliMatrix{Prefix::NegI, PauliMatrix::BasicPauliMatrix::SigmaZ};
-};
+}
