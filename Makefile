@@ -1,5 +1,4 @@
-CXX=clang++
-CXXFLAGS=-O3 -Wall -Werror -pedantic -std=c++11 -stdlib=libc++ -lc++abi
+CXXFLAGS=-O3 -Wall -Werror -pedantic -std=c++11
 
 test: test_paulimatrix test_prefix test_expression test_tensor
 	./test_paulimatrix
