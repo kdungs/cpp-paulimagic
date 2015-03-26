@@ -8,7 +8,9 @@ auto test_equalityOperator() -> void {
   assert(TensorProduct<1>{} == TensorProduct<1>{PM::I});
 }
 
-auto test_inequalityOperator() -> void {}
+auto test_inequalityOperator() -> void {
+  assert(TensorProduct<1>{} != TensorProduct<1>{PM::X});
+}
 
 auto test_multiplicationOperator() -> void {
   assert(((TensorProduct<4>{PM::X} * TensorProduct<4>{PM::Y} *

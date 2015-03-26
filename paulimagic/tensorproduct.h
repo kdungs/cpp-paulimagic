@@ -23,7 +23,9 @@ class TensorProduct {
     return elements_ == rhs.elements_;
   }
 
-  auto operator!=(const TensorProduct<N>& rhs) const noexcept -> bool {}
+  auto operator!=(const TensorProduct<N>& rhs) const noexcept -> bool {
+    return !(*this == rhs);
+  }
 
   auto operator*(const TensorProduct<N>& rhs) const -> TensorProduct<N> {
     auto res = TensorProduct<N>{};
