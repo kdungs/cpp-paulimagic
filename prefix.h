@@ -18,7 +18,7 @@ auto operator-(Prefix p) -> Prefix {
     default:
       assert(false);
   }
-};
+}
 
 auto isPositive(Prefix p) noexcept -> bool {
   return p == Prefix::Pos1 || p == Prefix::PosI;
