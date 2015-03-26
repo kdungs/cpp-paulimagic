@@ -1,7 +1,7 @@
 CXXFLAGS=-g -O3 -Wall -Werror -pedantic -std=c++11 --coverage
 CXXFLAGS+=-I../
 
-targets = test_paulimatrix test_prefix test_expression test_tensor
+targets = test_prefix test_paulimatrix test_tensorproduct
 
 all: $(targets)
 
