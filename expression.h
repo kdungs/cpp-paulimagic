@@ -133,10 +133,10 @@ class Expression {
   std::vector<PauliMatrix> matrices_;
 };
 
-const auto Expression::Identity = Expression{Prefix::Pos1};
-const auto Expression::NegativeIdentity = Expression{Prefix::Neg1};
-const auto Expression::ImaginaryIdentity = Expression{Prefix::PosI};
-const auto Expression::NegativeImaginaryIdentity = Expression{Prefix::NegI};
+const Expression Expression::Identity = Expression{Prefix::Pos1};
+const Expression Expression::NegativeIdentity = Expression{Prefix::Neg1};
+const Expression Expression::ImaginaryIdentity = Expression{Prefix::PosI};
+const Expression Expression::NegativeImaginaryIdentity = Expression{Prefix::NegI};
 
 auto operator<<(std::ostream& os, const Expression& exp) -> std::ostream & {
   os << exp.prefix();
