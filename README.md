@@ -11,19 +11,4 @@ This program uses said relations to simplify products of expressions containing 
 
 
 ## Usage
-After including the header `paulimagic/expression.h`, expressions can be constructed and multiplied like so:
-```cplusplus
-auto ex1 = Expression{Prefix::PosI, {PauliMatrix::X, PauliMatrix::Y}};
-auto ex2 = Expression{PauliMatrix::Z};
-auto ex3 = ex1 * ex2;
-std::cout << ex3 << '\n';
-```
-where ex1 = ⅈσ<sub>x</sub>σ<sub>y</sub> and ex2 = σ<sub>z</sub> such that ex3 = ⅈσ<sub>x</sub>σ<sub>y</sub>σ<sub>z</sub> = ⅈⅈ𝟙= -𝟙.
-
-Please bear in mind that `Expression{PauliMatrix:X, PauliMatrix::Y, PauliMatrix::Z}` should instead be written as `Expression::ImaginaryIdentity`. Using non-simplified expressions is undefined behaviour. Especially 
-```cplusplus
-assert((Expression{PauliMatrix::X, PauliMatrix::Y, PauliMatrix::Z} * _1) ==
-       Expression::ImaginaryIdentity);
-```
-**will fail**.
-
+_Changed a lot with recent PR. Will be updated shortly._
