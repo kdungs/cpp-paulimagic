@@ -25,4 +25,10 @@ int main() {
 }
 ```
 
-Compile it with the flags `-O3 -Wall -Werror -pedantic -std=c++11 -I/path/to/cpp-paulimagic`. It should print out the result `(16,0)` representing the complex number 16+0ⅈ. Verifying this result is left as an exercise for the gentle reader.
+Compile it with the flags `-O3 -Wall -Werror -pedantic -std=c++11 -I/path/to/cpp-paulimagic`. It should print out the result `(16,0)` representing the complex number 16+0ⅈ. We can indeed verify this result by hand:
+
+(σ<sub>x</sub>⊗𝟙⊗𝟙⊗𝟙)(σ<sub>y</sub>⊗𝟙⊗𝟙⊗𝟙)(σ<sub>z</sub>⊗𝟙⊗ⅈ𝟙⊗𝟙)(𝟙⊗-𝟙⊗𝟙⊗𝟙)
+ = (σ<sub>x</sub>σ<sub>y</sub>σ<sub>z</sub>⊗-𝟙⊗ⅈ𝟙⊗𝟙)
+ = (ⅈ𝟙⊗-𝟙⊗ⅈ𝟙⊗𝟙)
+ 
+Tr(ⅈ𝟙⊗-𝟙⊗ⅈ𝟙⊗𝟙) = Tr(ⅈ𝟙)Tr(-𝟙)Tr(ⅈ𝟙)Tr(𝟙) =  2i × (-2) × 2i × 2 = 16
