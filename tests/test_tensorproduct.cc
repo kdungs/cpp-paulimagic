@@ -1,8 +1,11 @@
 #include "paulimagic/tensorproduct.h"
 
+#include <array>
 #include <complex>
 #include <sstream>
 #include <string>
+
+#include <iostream>
 
 auto test_equalityOperator() -> void {
   assert(TensorProduct<1>{} == TensorProduct<1>{PM::I});
@@ -38,24 +41,25 @@ auto test_ostreamOperator() -> void {
   ss << TensorProduct<3>{PM::X, PM::Y, PM::Z};
   assert(ss.str() == std::string{"[X Y Z]"});
 }
-    
+
 auto test_summation() -> void {
-  int n = 4;
-  int sum = 0;
-  PM array[] = {PM::X,PM::Y,PM::Z};
-  for(int j = 0; j < 3; ++j)
-  {
+  const int N = 4;
+  std::complex<int> sum = 0;
+  auto array = std::array<PauliMatrix, 3>{PM::X, PM::Y, PM::Z};
+  for (int j = 0; j < 3; ++j) {
     for (int i1 = 0; i1 < 4; ++i1) {
       for (int i2 = 0; i2 < 4; ++i2) {
-        auto t1 = TensorProduct<n>{};
-        auto t2 = TensorProduct<n>{};
-        t1.set<i1>(array[j]);
-        t2.set<i1>(array[j]);
-        sum += (t1*t2).trace();
+        auto t1 = TensorProduct<N>{};
+        auto t2 = TensorProduct<N>{};
+        t1.set(i1, array[j]);
+        t2.set(i1, array[j]);
+        sum += (t1 * t2).trace();
       }
     }
   }
-  assert(sum == 3*n/4);
+  std::cout << sum << '\n';
+  assert(sum.imag() == 0);
+  assert(sum.real() == 3 * N / 4);
 }
 
 int main() {

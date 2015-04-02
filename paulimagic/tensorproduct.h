@@ -41,6 +41,12 @@ class TensorProduct {
     elements_[I] = std::forward<PMAT>(pm);
   }
 
+  template <typename PMAT>
+  auto set(std::size_t i, PMAT&& pm) -> void {
+    assert(i < N);
+    elements_[i] = std::forward<PMAT>(pm);
+  }
+
   template <typename T = int, typename C = std::complex<T>>
   auto trace() const noexcept -> C {
     return std::accumulate(
