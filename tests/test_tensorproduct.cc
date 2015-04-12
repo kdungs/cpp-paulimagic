@@ -43,20 +43,22 @@ auto test_ostreamOperator() -> void {
 }
 
 auto test_summation() -> void {
-  const int N = 4;
+  const int N = 4; // Number of bath spins
   std::complex<int> sum = 0;
-  auto array = std::array<PauliMatrix, 3>{PM::X, PM::Y, PM::Z};
+  auto array = std::array<PauliMatrix, 3>{{PM::X, PM::Y, PM::Z}};
   for (int j = 0; j < 3; ++j) {
-    for (int i1 = 0; i1 < 4; ++i1) {
-      for (int i2 = 0; i2 < 4; ++i2) {
-        auto t1 = TensorProduct<N>{};
-        auto t2 = TensorProduct<N>{};
+    for (int i1 = 0; i1 < N+1; ++i1) {
+      for (int i2 = 0; i2 < N+1; ++i2) {
+        auto t1 = TensorProduct<N+1>{};
+        auto t2 = TensorProduct<N+1>{};
         t1.set(i1, array[j]);
-        t2.set(i1, array[j]);
+        t2.set(i2, array[j]);
         sum += (t1 * t2).trace();
       }
     }
   }
+  sum /= pow(2.0, N+1); // Divide by DOS
+  sum /= pow(2.0, 2); // Spin = sigma/2
   std::cout << sum << '\n';
   assert(sum.imag() == 0);
   assert(sum.real() == 3 * N / 4);
